@@ -29,6 +29,10 @@ public class LocationHandler extends IoHandlerAdapter {
         String userName = (String) session.getAttribute("userName");
         //将关闭的session对象从list中移除
         mSessionList.remove(session);
+        //两者为null说明客户端还没有定位成功,这时不会显示在其他用户的地图上
+        if (deviceId == null && userName == null) {
+            return;
+        }
         //给其他的客户端发送消息，用deviceId和userName作为标志告诉其他人哪个客户端断开了
         for (IoSession ioSession : mSessionList) {
             ioSession.write("SESSIONCLOSED" + " " + deviceId + " " + userName);

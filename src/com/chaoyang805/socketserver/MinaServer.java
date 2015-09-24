@@ -19,6 +19,7 @@ public class MinaServer {
      */
     public static void main(String[] args) {
         try {
+
             //1.实例化acceptor对象
             NioSocketAcceptor acceptor = new NioSocketAcceptor();
             //2.设置消息收发的handler对象
